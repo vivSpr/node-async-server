@@ -11,17 +11,13 @@ function waitAndRespond(fn, seconds) {
 }
 
 function numberIsValid(number) {
-	if (typeof parseInt(number) == 'number'){
-		var numbers = number.split("");
-		var rightMostNumber = parseInt(numbers.pop());
-		var total = numbers
-			.map(int => parseInt(int))
-			.reduce((accum, current) => accum + current);
+	var numbers = number.split("");
+	var rightMostNumber = parseInt(numbers.pop());
+	var total = numbers
+		.map(int => parseInt(int))
+		.reduce((accum, current) => accum + current);
 
-		return total % 10 == rightMostNumber;
-	}
-
-	return false;
+	return total % 10 == rightMostNumber;
 }
 
 function generateNumber() {
@@ -47,7 +43,7 @@ app.get('/waitAndError',
 app.get('/publish', (req, res) => res.send({"jobId": generateNumber()}));
 app.get('/status', (req, res) => {
 	var jobId = parseInt(req.query.jobId);
-	if (numberIsValid(req.query.jobId) && typeof jobId == 'number') {
+	if (numberIsValid(jobId) && typeof jobId == 'number') {
 		if (Math.floor(Math.random() * 10 + 1) > 7) {
 			res.send({"id": Math.floor(Math.random()*1000+1), "status": "complete", "jobId": jobId});
 		} else {
