@@ -46,11 +46,12 @@ app.get('/waitAndError',
 
 app.get('/publish', (req, res) => res.send({"jobId": generateNumber()}));
 app.get('/status', (req, res) => {
-	if (numberIsValid(req.query.jobId)) {
-		if (Math.floor(Math.random() * 10 + 1) > 5) {
-			res.send({"id": Math.floor(Math.random()*1000+1), "status": "complete", "jobId": req.query.jobId});
+	var jobId = parseInt(req.query.jobId);
+	if (numberIsValid(req.query.jobId) && typeof jobId == 'number') {
+		if (Math.floor(Math.random() * 10 + 1) > 7) {
+			res.send({"id": Math.floor(Math.random()*1000+1), "status": "complete", "jobId": jobId});
 		} else {
-			res.send({"status": "processing", "jobId": req.query.jobId});
+			res.send({"status": "processing", "jobId": jobId});
 		}
 	} else {
 		res.status(400).send("Bad Request: unknown job");
