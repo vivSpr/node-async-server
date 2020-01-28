@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 3000
 
 function waitAndRespond(fn, seconds) {
 	if (typeof parseInt(seconds) == 'number'){
@@ -59,4 +58,4 @@ app.use(function(req, res){
 });
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(process.env.PORT, () => console.log(`The app has started!`));
