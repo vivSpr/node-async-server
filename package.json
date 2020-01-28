@@ -8,9 +8,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "node inspect index.js"
+    "debug": "node inspect ./index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,9 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "10.15.1"
+  },
   "bugs": {
     "url": "https://github.com/vivSpr/node-async-server/issues"
   },
