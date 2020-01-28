@@ -54,7 +54,7 @@ app.get('/status', (req, res) => {
 });
 
 app.use(function(req, res){
-   res.sendFile('./index.html', { root: __dirname });
+   res.send("There is nothing to see here!");
 });
 
 
