@@ -55,7 +55,7 @@ app.get('/status', (req, res) => {
 });
 
 app.use(function(req, res){
-   res.sendStatus(404);
+   res.sendFile('./index.html', { root: __dirname });
 });
 
 
