@@ -28,22 +28,22 @@ function generateNumber() {
 	return parseInt(arrayOfDigits.concat(checkSum).join(""));
 }
 
-app.get('/waitAndRespond', 
+app.post('/waitAndRespond', 
 	(req, res) => {
 		waitAndRespond(function () { res.send({"id": Math.floor((Math.random() * 10) + 1)}) }, req.query.seconds)
 	}
 );
 
-app.get('/waitAndError',
+app.post('/waitAndError',
 	(req, res) => {
 		waitAndRespond(function () { res.status(400).send('Bad Request') }, req.query.seconds);
 	}
 );
 
-app.get('/publish', (req, res) => res.send({"jobId": generateNumber()}));
+app.post('/publish', (req, res) => res.send({"jobId": generateNumber()}));
 app.get('/status', (req, res) => {
 	var jobId = parseInt(req.query.jobId);
-	if (numberIsValid(jobId) && typeof jobId == 'number') {
+	if (typeof jobId == 'number' && numberIsValid(req.query.jobId)) {
 		if (Math.floor(Math.random() * 10 + 1) > 7) {
 			res.send({"id": Math.floor(Math.random()*1000+1), "status": "complete", "jobId": jobId});
 		} else {
@@ -52,6 +52,10 @@ app.get('/status', (req, res) => {
 	} else {
 		res.status(400).send("Bad Request: unknown job");
 	}
+});
+
+app.use(function(req, res){
+   res.sendStatus(404);
 });
 
 
